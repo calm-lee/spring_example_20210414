@@ -18,4 +18,54 @@
 		WHERE 
 			`id` = #{id}
 	</select>
+	
+	<insert id="insertReview" parameterType="com.calmlee.ex.lesson03.model.Review">
+		INSERT INTO `REVIEW`
+		(
+			  `storeName`
+			,  `menu`
+			,  `userName`
+			,  `point`
+			,  `review`
+			,  `createdAt`
+			,  `updatedAt`		
+		)
+		VALUES
+		(
+			#{storeName}
+			, #{menu}
+			, #{userName}
+			, #{point}
+			, #{review}
+			, now()
+			, now()
+		)
+		
+	</insert>
+	
+	<insert id="insertReviewField" parameterType="com.calmlee.ex.lesson03.model.Review">
+		INSERT INTO `review`
+		(
+			`storeName`
+			,  `menu`
+			,  `userName`
+			,  `point`
+			,  `review`
+			,  `createdAt`
+			,  `updatedAt`		
+		)
+		VALUES
+		(
+			#{storeName}
+			, #{menu}
+			, #{userName}
+			, #{point}
+			, #{review}
+			, now()
+			, now()		
+		)
+		
+	
+	
+	</insert>
 </mapper>

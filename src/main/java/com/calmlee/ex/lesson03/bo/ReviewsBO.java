@@ -8,10 +8,18 @@ import com.calmlee.ex.lesson03.model.Review;
 
 @Service
 public class ReviewsBO {
+	
 	@Autowired
-	private ReviewDAO reivewDAO;
+	private ReviewDAO reviewDAO;
 	public Review getReview(int id) {
-		return reivewDAO.selectReview(id);
+		return reviewDAO.selectReview(id);
 	}
 
+	public int insertReview(Review review) {
+		return reviewDAO.insertReview(review);
+	}
+	
+	public int insertReviewAsField(String storeName, String menu, String userName, double point, String review) {
+		return reviewDAO.insertReviewField(storeName, menu, userName, point, review);
+	}
 }

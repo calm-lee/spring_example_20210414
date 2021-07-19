@@ -28,4 +28,24 @@ public class ReviewRestController {
 		System.out.println("### id : " + id);
 		return reviewBO.getReview(id);
 	}
+	
+	@RequestMapping("/lesson03/ex02")
+	public String ex02() {
+		Review review = new Review(); // Spring  bean이 아니고 일반 Java bean
+		review.setStoreName("뚜뚜 삼겹");
+		review.setMenu("삼겹 꼬막 세트");
+		review.setUserName("김또또");
+		review.setPoint(5.0);
+		review.setReview("맛있어요~~~!!");
+		
+		int row = reviewBO.insertReview(review); //insert가 된 row 수를 리턴받음
+		return "success row count: " + row; // @ResponseBody로 인해 STring 값 자체가 ResponseBody에 담김
+	}
+	
+	
+	@RequestMapping("/lesson03/ex03")
+	public String ex02_2() {
+		int row = reviewBO.insertReviewAsField("도미노피자", "콤비네이션R", "가갸갸", 5.0, "맛있어요!!");
+		return "success row count: " + row;
+	}
 }
