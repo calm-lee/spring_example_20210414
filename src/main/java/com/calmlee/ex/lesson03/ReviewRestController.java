@@ -43,9 +43,32 @@ public class ReviewRestController {
 	}
 	
 	
-	@RequestMapping("/lesson03/ex03")
+	
+	@RequestMapping("/lesson03/ex02/1")
 	public String ex02_2() {
 		int row = reviewBO.insertReviewAsField("도미노피자", "콤비네이션R", "가갸갸", 5.0, "맛있어요!!");
 		return "success row count: " + row;
+	}
+	
+	
+	
+	// 요청 URL : http://localhost/lesson03/ex03?id=23&review=삼겹살은 역시 맛있어~~
+	@RequestMapping("/lesson03/ex03")
+	public String ex03(
+			@RequestParam("id") int id,
+			@RequestParam("review") String reivew) {
+		
+		int row = reviewBO.updateReview(id, reivew);
+		return "변경 완료" + row;
+	}
+	
+	// 요청 URL : http://localhost/lesson03/ex04?id=23
+	@RequestMapping("/lesson03/ex04")
+	public String ex04(
+			@RequestParam("id") int id) {
+		
+		int row = reviewBO.deleteReviewById(id);
+		
+		return "삭제 성공: " + row;
 	}
 }
