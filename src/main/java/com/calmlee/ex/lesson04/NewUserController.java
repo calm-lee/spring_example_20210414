@@ -22,8 +22,7 @@ public class NewUserController {
 	
 	// http://localhost/lesson04/ex01/1
 	
-	@RequestMapping(path = "/1", method = RequestMethod.GET)
-	
+	@RequestMapping(path = "/user", method = RequestMethod.GET)	
 	public String addUserView() {
 		return "lesson04/addUser"; // view 경로
 	}
@@ -39,7 +38,7 @@ public class NewUserController {
 		// request -> response
 		
 		// DB insert
-		newUserBO.insertNewUser(name, birth, introduce, email);
+//		newUserBO.insertNewUser(name, birth, introduce, email);
 		
 		// 결과 jsp
 		return "lesson04/afterAddUser";
@@ -59,5 +58,17 @@ public class NewUserController {
 		model.addAttribute("subject", "회원 정보");
 		
 		return "lesson04/getLastUser";
+	}
+	
+	
+	@RequestMapping("/get_user")
+	public String getUser(Model model) {
+		
+		NewUser newUser = newUserBO.getLastUser();
+		
+		model.addAttribute("newUser", newUser);
+		
+		return "lesson06/getNewUser";
+
 	}
 }
