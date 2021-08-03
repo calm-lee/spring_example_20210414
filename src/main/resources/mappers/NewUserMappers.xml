@@ -41,5 +41,15 @@
 	   	limit 1;
 	</select>
 	
+	<select id="existNewUserByName" parameterType="String" resultType="boolean">
+		
+		select 
+			count(1) 
+		from 
+			`new_user`
+		where 
+			`name` = #{name};
+		
+	</select>
 	
 </mapper>

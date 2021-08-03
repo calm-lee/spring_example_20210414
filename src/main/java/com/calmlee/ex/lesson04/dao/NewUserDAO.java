@@ -16,4 +16,6 @@ public interface NewUserDAO {
 	
 		public NewUser selectLastUser();
 		
+		public boolean existNewUserByName(String name);
+		
 }
