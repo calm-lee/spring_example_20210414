@@ -15,28 +15,25 @@
 </head>
 <body>
 	<div class="container">
-		<div class="d-flex justify-content-start">
-			<b>이름:</b><input type="text" id="name" class="form-control col-3  ml-2" placeholder="이름을 입력해주세요.">
-			<button type="button" id="nameCheckBtn" class="btn btn-info ml-2">중복확인</button>
-		</div>
-		<div id="statusArea">
-			<span class="text-danger"></span>
-		</div>
-		<button type="submit" class="btn btn-success mt-4">가입하기</button>
+		<b>이름:</b>
+		<label for="name"><input id="name" type="text" class="form-control" placeholder="이름을 입력하세요"></label>
+		<button id="nameCheckBtn" type="button" class="btn btn-info">중복확인</button><br>
+		<div id="statusArea"></div><br>
+		<button id="joinBtn" type="submit" class="btn btn-success">가입하기</button>
 	</div>
 	
 	<script>
 		$(document).ready(function() {
 			// 중복확인 버튼 클릭
 			$('#nameCheckBtn').on('click', function(){
-				
-				$('#nameCheckBtn').empty();
-				
+
 				let name = $('#name').val().trim();
+				
+				$('#statusArea').empty();
 				
 				
 				if(name == ''){
-					$('#statusArea').append("<small class='text-danger'>이름이 비어있습니다</span>");
+					$('#statusArea').append("<span class='text-danger'>이름이 비어있습니다</span>");
 					return;
 				}
 				
@@ -46,7 +43,10 @@
 					, data: {'name' : name}
 					, url: '/lesson06/ex02/is_duplication'
 					, success: function(data){
-						
+						//alert(data.is_duplication)
+						if (data.is_duplication === true){
+							$('#statusArea').append("<span class='text-danger'>이름이 중복되었습니다</span>");
+						} 
 					}
 					, error : function(e){
 						alert("error: " + e);
@@ -55,7 +55,21 @@
 				});
 				
 			});
-
+			
+			// 회원가입 버튼 클릭
+			$('#joinBtn').on('click',function(e){
+				e.preventDefault(); // 바로 submit 되는 것 방지
+				
+				console.log($('#statusArea').children().length); // statusArea 밑에 자식태그 존재 여부
+				
+				// 만약 statusArea에 아무 자식노드(태그)가 없으면 submit한다.
+				
+				if($('#statusArea').children().length == 0){
+					alert("서브밋 가능");
+				} else {
+					alert("서브밋 불가");
+				}
+			});
 		});
 	</script>
 
